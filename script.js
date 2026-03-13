@@ -1,13 +1,23 @@
 /* ═══════════════════════════════════════
-   RETKIT V2 — Interactions
-   All animations use transform/opacity
-   for 60fps GPU compositing
+   RETKIT V3 — Interactions
+   60fps GPU compositing throughout
    ═══════════════════════════════════════ */
 
 (() => {
   'use strict';
 
-  // --- Intersection Observer for reveals ---
+  // ─── Cursor glow (desktop only) ───
+  const cursorGlow = document.getElementById('cursorGlow');
+  if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    }, { passive: true });
+  } else if (cursorGlow) {
+    cursorGlow.style.display = 'none';
+  }
+
+  // ─── Intersection Observer for reveals ───
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -16,65 +26,53 @@
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
   );
 
-  document.querySelectorAll('.reveal, .reveal-float').forEach((el) => {
+  document.querySelectorAll('.reveal, .reveal-float, .ps-card, .tl-step, .bento-card--hero').forEach((el) => {
     revealObserver.observe(el);
   });
 
-  // --- Header scroll effect ---
+  // ─── Header + sticky CTA ───
   const header = document.getElementById('header');
-  let lastScroll = 0;
   let ticking = false;
 
-  const onScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      header.classList.toggle('header--scrolled', y > 50);
 
-        // Header background
-        header.classList.toggle('header--scrolled', scrollY > 60);
+      const stickyCta = document.getElementById('stickyCta');
+      if (stickyCta) {
+        stickyCta.classList.toggle('sticky-cta--visible', y > 500);
+      }
 
-        // Sticky CTA (mobile)
-        const stickyCta = document.getElementById('stickyCta');
-        if (stickyCta) {
-          stickyCta.classList.toggle('sticky-cta--visible', scrollY > 600);
-        }
-
-        // Steps progress line
-        updateStepsProgress();
-
-        lastScroll = scrollY;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  };
+      updateTimelineProgress();
+      ticking = false;
+    });
+  }
 
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // --- Steps progress line ---
-  function updateStepsProgress() {
-    const stepsSection = document.querySelector('.steps');
-    const progressBar = document.getElementById('stepsProgress');
-    if (!stepsSection || !progressBar) return;
+  // ─── Timeline progress ───
+  function updateTimelineProgress() {
+    const timeline = document.querySelector('.timeline');
+    const bar = document.getElementById('timelineProgress');
+    if (!timeline || !bar) return;
 
-    const rect = stepsSection.getBoundingClientRect();
-    const viewportH = window.innerHeight;
-
-    if (rect.top >= viewportH || rect.bottom <= 0) {
-      progressBar.style.height = '0%';
+    const rect = timeline.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (rect.top >= vh || rect.bottom <= 0) {
+      bar.style.height = '0%';
       return;
     }
-
-    const total = rect.height;
-    const scrolled = viewportH - rect.top;
-    const pct = Math.min(Math.max(scrolled / total, 0), 1) * 100;
-    progressBar.style.height = pct + '%';
+    const pct = Math.min(Math.max((vh - rect.top) / rect.height, 0), 1) * 100;
+    bar.style.height = pct + '%';
   }
 
-  // --- Counter animation ---
+  // ─── Counter animations ───
   const counterObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -87,42 +85,95 @@
     { threshold: 0.5 }
   );
 
-  document.querySelectorAll('[data-count]').forEach((el) => {
-    counterObserver.observe(el);
-  });
+  document.querySelectorAll('[data-count]').forEach((el) => counterObserver.observe(el));
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.count, 10);
-    const duration = 1200;
+    if (target === 0) { el.textContent = '0'; return; }
+    const duration = 1500;
     const start = performance.now();
 
     function tick(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 4);
       el.textContent = Math.round(eased * target);
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
+      if (t < 1) requestAnimationFrame(tick);
     }
-
     requestAnimationFrame(tick);
   }
 
-  // --- Smooth anchor scrolling ---
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href');
+  // ─── Phone screen switcher ───
+  const dots = document.querySelectorAll('.phone-dot');
+  const screens = document.querySelectorAll('.phone-screen');
+  let currentScreen = 0;
+  let autoplayTimer;
+
+  function switchScreen(idx) {
+    screens.forEach((s) => {
+      s.classList.remove('active');
+      s.style.transform = 'translateX(20px)';
+    });
+    dots.forEach((d) => d.classList.remove('active'));
+
+    screens[idx].classList.add('active');
+    screens[idx].style.transform = 'translateX(0)';
+    dots[idx].classList.add('active');
+    currentScreen = idx;
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const target = parseInt(dot.dataset.target, 10);
+      switchScreen(target);
+      resetAutoplay();
+    });
+  });
+
+  function autoplay() {
+    autoplayTimer = setInterval(() => {
+      const next = (currentScreen + 1) % screens.length;
+      switchScreen(next);
+    }, 4000);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplay();
+  }
+
+  if (screens.length > 0) autoplay();
+
+  // ─── Tilt effect on bento cards (desktop) ───
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateY(-4px)`;
+      }, { passive: true });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ─── Smooth anchor scrolling ───
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
       if (id === '#') return;
       const target = document.querySelector(id);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
 
-  // --- Trigger initial state ---
+  // ─── Init ───
   onScroll();
 })();
