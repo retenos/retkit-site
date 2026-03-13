@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retkit — Система лояльности через мессенджеры</title>
+  <meta name="description" content="Подключение клиентов к программе лояльности за 1 клик через Telegram и WhatsApp. Без приложений, без регистраций.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient background -->
+  <div class="ambient">
+    <div class="ambient__orb ambient__orb--1"></div>
+    <div class="ambient__orb ambient__orb--2"></div>
+    <div class="ambient__orb ambient__orb--3"></div>
+  </div>
+  <div class="noise"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <span class="header__logo-icon">◆</span>
+        RETKIT
+      </a>
+      <nav class="header__nav">
+        <a href="#how" class="header__link">Как работает</a>
+        <a href="#features" class="header__link">Возможности</a>
+        <a href="#roadmap" class="header__link">Roadmap</a>
+        <a href="#partners" class="header__link">Партнёрам</a>
+      </nav>
+      <a href="#cta" class="btn btn--primary btn--sm header__cta">Получить доступ</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__badge reveal">
+          <span class="pulse-dot"></span>
+          Beta — бесплатно 1 год для первых партнёров
+        </div>
+        <h1 class="hero__title reveal">
+          Лояльность клиентов<br>
+          <span class="gradient-text">через мессенджеры</span>
+        </h1>
+        <p class="hero__subtitle reveal">
+          Клиент сканирует QR → попадает в Telegram или WhatsApp → мгновенно подключается к вашей программе лояльности. Без приложений. Без форм. Один клик.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#cta" class="btn btn--primary btn--lg">
+            Стать партнёром
+            <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#how" class="btn btn--glass btn--lg">Как это работает</a>
+        </div>
+
+        <!-- Hero metrics -->
+        <div class="hero__metrics reveal">
+          <div class="metric">
+            <span class="metric__value" data-count="1">0</span>
+            <span class="metric__unit">клик</span>
+            <span class="metric__label">Подключение</span>
+          </div>
+          <div class="metric__divider"></div>
+          <div class="metric">
+            <span class="metric__value" data-count="100">0</span>
+            <span class="metric__unit">%</span>
+            <span class="metric__label">Без помощи сотрудника</span>
+          </div>
+          <div class="metric__divider"></div>
+          <div class="metric">
+            <span class="metric__value">&lt;30</span>
+            <span class="metric__unit">сек</span>
+            <span class="metric__label">От скана до лояльности</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating cards -->
+      <div class="hero__float hero__float--left reveal-float">
+        <div class="float-card">
+          <div class="float-card__icon">✓</div>
+          <div class="float-card__text">Новый клиент подключён</div>
+        </div>
+      </div>
+      <div class="hero__float hero__float--right reveal-float">
+        <div class="float-card">
+          <div class="float-card__icon">+50</div>
+          <div class="float-card__text">Бонусов начислено</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMS -->
+    <section class="problems" id="problems">
+      <div class="container">
+        <div class="section-label reveal">Проблема</div>
+        <h2 class="section-title reveal">
+          Почему программы лояльности<br>
+          <span class="gradient-text">не работают</span>
+        </h2>
+        <div class="problems__grid">
+          <div class="problem-card reveal">
+            <div class="problem-card__number">01</div>
+            <div class="problem-card__icon">📱</div>
+            <h3>Отдельное приложение</h3>
+            <p>Клиенты не хотят ставить ещё одно приложение ради бонусов. 78% удаляют его в первую неделю.</p>
+          </div>
+          <div class="problem-card reveal">
+            <div class="problem-card__number">02</div>
+            <div class="problem-card__icon">⏳</div>
+            <h3>Долгая регистрация</h3>
+            <p>Заполнение форм, подтверждение email, создание пароля — каждый шаг теряет 40% аудитории.</p>
+          </div>
+          <div class="problem-card reveal">
+            <div class="problem-card__number">03</div>
+            <div class="problem-card__icon">🔕</div>
+            <h3>Клиенты забывают</h3>
+            <p>Пластиковые карты теряются, push-уведомления отключают. Нет касания — нет возврата.</p>
+          </div>
+          <div class="problem-card reveal">
+            <div class="problem-card__number">04</div>
+            <div class="problem-card__icon">📊</div>
+            <h3>Нет базы клиентов</h3>
+            <p>Бизнес не знает кто приходит, как часто и что покупает. Нет данных — нет стратегии роста.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="container">
+        <div class="section-label reveal">Решение</div>
+        <h2 class="section-title reveal">
+          Подключение за
+          <span class="gradient-text">30 секунд</span>
+        </h2>
+        <p class="section-desc reveal">Четыре шага от первого контакта до постоянного клиента</p>
+
+        <div class="steps">
+          <div class="steps__line">
+            <div class="steps__progress" id="stepsProgress"></div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step__marker">
+              <span>01</span>
+            </div>
+            <div class="step__content">
+              <h3>Клиент сканирует QR</h3>
+              <p>QR-код на кассе, столике, визитке или чеке. Камера телефона — единственный инструмент.</p>
+            </div>
+            <div class="step__visual">
+              <div class="step__phone">
+                <div class="step__phone-screen">
+                  <div class="qr-scan-anim">
+                    <div class="qr-scan-anim__grid"></div>
+                    <div class="qr-scan-anim__line"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step__marker">
+              <span>02</span>
+            </div>
+            <div class="step__content">
+              <h3>Выбирает мессенджер</h3>
+              <p>Telegram или WhatsApp — клиент выбирает привычный канал. Никаких новых приложений.</p>
+            </div>
+            <div class="step__visual">
+              <div class="messenger-choice">
+                <div class="messenger-choice__btn messenger-choice__btn--tg">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.02-2.02 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.09-.49-.84-.28-1.51-.42-1.45-.89.03-.25.38-.5 1.04-.78 4.07-1.77 6.79-2.94 8.15-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/></svg>
+                  Telegram
+                </div>
+                <div class="messenger-choice__btn messenger-choice__btn--wa">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.019-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step__marker">
+              <span>03</span>
+            </div>
+            <div class="step__content">
+              <h3>Подключение в один клик</h3>
+              <p>Нажимает «Старт» в боте — и всё. Без форм, паролей, подтверждений. Мгновенная регистрация.</p>
+            </div>
+            <div class="step__visual">
+              <div class="one-click-anim">
+                <div class="one-click-anim__btn">
+                  <span>▶ Старт</span>
+                </div>
+                <div class="one-click-anim__ripple"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step reveal">
+            <div class="step__marker">
+              <span>04</span>
+            </div>
+            <div class="step__content">
+              <h3>Клиент в системе</h3>
+              <p>Моментально попадает в вашу программу лояльности. Получает приветственный бонус. Становится частью базы.</p>
+            </div>
+            <div class="step__visual">
+              <div class="success-anim">
+                <svg class="success-anim__check" width="48" height="48" viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="22" fill="none" stroke="url(#successGrad)" stroke-width="2" class="success-anim__circle"/>
+                  <path d="M15 24l6 6 12-12" fill="none" stroke="url(#successGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="success-anim__path"/>
+                  <defs>
+                    <linearGradient id="successGrad" x1="0" y1="0" x2="48" y2="48">
+                      <stop offset="0%" stop-color="#a78bfa"/>
+                      <stop offset="100%" stop-color="#38bdf8"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <span class="success-anim__label">Подключено!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-label reveal">Возможности</div>
+        <h2 class="section-title reveal">
+          Всё что нужно для
+          <span class="gradient-text">программы лояльности</span>
+        </h2>
+
+        <div class="features__grid">
+          <div class="feature-card feature-card--large reveal">
+            <div class="feature-card__glow"></div>
+            <div class="feature-card__tag">Ключевое</div>
+            <h3>Регистрация в 1 клик</h3>
+            <p>QR-код → мессенджер → готово. Конверсия подключения стремится к 100%, потому что путь клиента максимально короткий.</p>
+            <div class="feature-card__visual">
+              <div class="funnel-anim">
+                <div class="funnel-anim__bar" style="--w: 100%; --delay: 0s">QR скан <span>100%</span></div>
+                <div class="funnel-anim__bar" style="--w: 95%; --delay: 0.1s">Открыл бота <span>95%</span></div>
+                <div class="funnel-anim__bar" style="--w: 92%; --delay: 0.2s">Нажал Старт <span>92%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-card__glow"></div>
+            <h3>Бонусная система</h3>
+            <p>Начисление и списание бонусов, приветственные бонусы для новых клиентов, гибкие правила накопления.</p>
+            <div class="feature-card__icon-wrap">
+              <span class="feature-card__big-icon">★</span>
+            </div>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-card__glow"></div>
+            <h3>База клиентов</h3>
+            <p>Каждый клиент — в вашей базе с первого визита. Контакт, история, частота — всё в одном месте.</p>
+            <div class="feature-card__icon-wrap">
+              <span class="feature-card__big-icon">◉</span>
+            </div>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-card__glow"></div>
+            <h3>История операций</h3>
+            <p>Полная хронология: начисления, списания, визиты. Прозрачность для бизнеса и для клиента.</p>
+            <div class="feature-card__icon-wrap">
+              <span class="feature-card__big-icon">↻</span>
+            </div>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-card__glow"></div>
+            <h3>Поддержка партнёров</h3>
+            <p>Dedicated поддержка для каждого партнёра. Помогаем настроить, запустить и масштабировать.</p>
+            <div class="feature-card__icon-wrap">
+              <span class="feature-card__big-icon">♦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="roadmap" id="roadmap">
+      <div class="container">
+        <div class="section-label reveal">Roadmap</div>
+        <h2 class="section-title reveal">
+          Продукт, который
+          <span class="gradient-text">растёт с вами</span>
+        </h2>
+        <p class="section-desc reveal">Retkit — не разовая акция. Это платформа, которая развивается и добавляет инструменты роста для вашего бизнеса.</p>
+
+        <div class="roadmap__timeline">
+          <div class="roadmap__phase roadmap__phase--active reveal">
+            <div class="roadmap__dot"></div>
+            <div class="roadmap__card">
+              <div class="roadmap__status roadmap__status--live">Доступно сейчас</div>
+              <h3>Фундамент</h3>
+              <ul>
+                <li>Регистрация клиентов в 1 клик</li>
+                <li>Бонусная система</li>
+                <li>База клиентов</li>
+                <li>История операций</li>
+                <li>Поддержка партнёров</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="roadmap__phase reveal">
+            <div class="roadmap__dot"></div>
+            <div class="roadmap__card">
+              <div class="roadmap__status roadmap__status--dev">В разработке</div>
+              <h3>Коммуникация</h3>
+              <ul>
+                <li>Рассылки клиентам</li>
+                <li>Автоматические напоминания</li>
+                <li>Уведомления об акциях</li>
+                <li>Уведомления о новинках</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="roadmap__phase reveal">
+            <div class="roadmap__dot"></div>
+            <div class="roadmap__card">
+              <div class="roadmap__status roadmap__status--future">Следующий этап</div>
+              <h3>Рост</h3>
+              <ul>
+                <li>Маркетинговые сценарии</li>
+                <li>Сегментация клиентской базы</li>
+                <li>Инструменты удержания</li>
+                <li>Аналитика и отчёты</li>
+                <li>API для интеграций</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section class="industries">
+      <div class="container">
+        <div class="section-label reveal">Для кого</div>
+        <h2 class="section-title reveal">
+          Работает в
+          <span class="gradient-text">любой сфере</span>
+        </h2>
+
+        <div class="industries__marquee">
+          <div class="industries__track">
+            <div class="industry-tag">Рестораны и кафе</div>
+            <div class="industry-tag">Автосервисы</div>
+            <div class="industry-tag">Салоны красоты</div>
+            <div class="industry-tag">Розничные магазины</div>
+            <div class="industry-tag">Фитнес-клубы</div>
+            <div class="industry-tag">Аптеки</div>
+            <div class="industry-tag">Автомойки</div>
+            <div class="industry-tag">Цветочные магазины</div>
+            <div class="industry-tag">Кофейни</div>
+            <div class="industry-tag">Барбершопы</div>
+            <div class="industry-tag">Пекарни</div>
+            <div class="industry-tag">Сервисный бизнес</div>
+            <!-- duplicate for seamless loop -->
+            <div class="industry-tag">Рестораны и кафе</div>
+            <div class="industry-tag">Автосервисы</div>
+            <div class="industry-tag">Салоны красоты</div>
+            <div class="industry-tag">Розничные магазины</div>
+            <div class="industry-tag">Фитнес-клубы</div>
+            <div class="industry-tag">Аптеки</div>
+            <div class="industry-tag">Автомойки</div>
+            <div class="industry-tag">Цветочные магазины</div>
+            <div class="industry-tag">Кофейни</div>
+            <div class="industry-tag">Барбершопы</div>
+            <div class="industry-tag">Пекарни</div>
+            <div class="industry-tag">Сервисный бизнес</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDING PARTNERS -->
+    <section class="partners" id="partners">
+      <div class="container">
+        <div class="partners__inner reveal">
+          <div class="partners__glow"></div>
+          <div class="section-label">Founding Partners</div>
+          <div class="partners__counter">
+            <span class="partners__count" data-count="12">0</span>
+            <span class="partners__separator">/</span>
+            <span class="partners__total">50</span>
+          </div>
+          <p class="partners__text">компаний уже в раннем доступе</p>
+
+          <div class="partners__perks">
+            <div class="perk">
+              <div class="perk__icon">🎁</div>
+              <div>
+                <strong>1 год бесплатно</strong>
+                <span>Полный доступ к платформе без оплаты</span>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk__icon">⚡</div>
+              <div>
+                <strong>Ранний доступ</strong>
+                <span>Новые функции — раньше всех</span>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk__icon">🤝</div>
+              <div>
+                <strong>Влияние на продукт</strong>
+                <span>Участие в приоритизации roadmap</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="partners__progress">
+            <div class="partners__bar">
+              <div class="partners__fill" style="--fill: 24%"></div>
+            </div>
+            <span class="partners__slots">Осталось 38 мест</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta" id="cta">
+      <div class="container">
+        <div class="cta__inner reveal">
+          <h2 class="cta__title">
+            Станьте одним из первых<br>
+            <span class="gradient-text">партнёров Retkit</span>
+          </h2>
+          <p class="cta__text">
+            Бесплатный доступ на 1 год для участников Beta. Подключите клиентов через QR — и они сразу в вашей программе лояльности через Telegram или WhatsApp.
+          </p>
+          <div class="cta__actions">
+            <a href="#" class="btn btn--primary btn--lg">
+              Подключиться к Beta
+              <svg class="btn__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" class="btn btn--glass btn--lg">Обсудить на встрече</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="header__logo-icon">◆</span> RETKIT
+      </div>
+      <p class="footer__copy">© 2025 Retkit. Система лояльности через мессенджеры.</p>
+    </div>
+  </footer>
+
+  <!-- Sticky CTA (mobile) -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="#cta" class="btn btn--primary btn--lg btn--full">Стать партнёром</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
